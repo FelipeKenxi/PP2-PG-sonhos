@@ -43,7 +43,7 @@ const forma_geometrica_corpo = new THREE.TetrahedronGeometry(raio_corpo, detalhe
 const corpo = new THREE.Mesh(forma_geometrica_corpo, material);
 corpo.position.set(0, 0, 0);
 
-// achatando nos eixos X e Y (deixa o tetraedro mais ovalado horizontalmente)
+// achatando nos eixos 
 corpo.scale.set(0.8, 0.7, 0.85); // X = 0.6, Y = 0.6, Z = 1
 
 // adicionar à cena
@@ -52,15 +52,17 @@ cena.add(corpo);
 
 //////////////////////////////////////////////////////
 // para a cabeça:
-const forma_geometrica_cabeca = new THREE.IcosahedronGeometry(0.3, 18);
+const raio_cabeca = 0.4;
+const forma_geometrica_cabeca = new THREE.IcosahedronGeometry(raio_cabeca, 18);
 const material_cabeca = new THREE.MeshStandardMaterial({
     color: 0xd1bed1,
     flatShading: true
 });
 
+
 const cabeca = new THREE.Mesh (forma_geometrica_cabeca, material_cabeca);
 cabeca.position.set(0, 0, 0.9);
-cabeca.scale.set(0.6, 0.6, 0.6);
+cabeca.scale.set(0.6, 0.6, 0.65); //para achatar a cabeça
 
 cena.add(cabeca);
 
@@ -70,6 +72,24 @@ cena.add(cabeca);
 //////////////////////////////////////////////////////
 // "rabinho" de lã:
 
+const raio_rabinho = 0.2;
+const detalhe_rabinho = detalhe_corpo;
+
+// primitiva geométrica: Tetraedro com mais detalhes
+const forma_geometrica_rabinho = new THREE.TetrahedronGeometry(raio_rabinho, detalhe_rabinho); 
+
+// mesh combinando forma e material
+const rabinho = new THREE.Mesh(forma_geometrica_rabinho, material);
+rabinho.position.set(0, 0, 0);
+
+// achatando nos eixos 
+rabinho.scale.set(0.8, 0.8, 0.8); // X = 0.6, Y = 0.6, Z = 1
+
+// posicionando 
+rabinho.position.set(0, 0, -0.8);
+
+// adicionar à cena
+cena.add(rabinho);
 
 //////////////////////////////////////////////////////
 // para dar uma luz:
@@ -77,6 +97,8 @@ const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000); //em cima branc
 cena.add(hemiLight); //adicionando à cena
 
 //////////////////////////////////////////////////////
+// patas:
+
 // para auxiliar as patas:
 const coord_x_pata = 0.4;
 const coord_y_pata = 0.5;
@@ -114,6 +136,58 @@ pata4.position.y = -coord_y_pata;
 pata4.position.z = coord_z_pata;
 pata4.position.x = -coord_x_pata;
 cena.add(pata4);
+
+//////////////////////////////////////////////////////
+//olhos:
+const raio_olho = 0.04;
+const forma_geometrica_olho = new THREE.IcosahedronGeometry(raio_olho, 18);
+const material_olho = new THREE.MeshStandardMaterial({
+    color: 0x000000,
+    flatShading: true
+});
+
+
+const olho_direito = new THREE.Mesh (forma_geometrica_olho, material_olho);
+olho_direito.position.set(0.09, 0.08, 1.15);
+
+const olho_esquerdo = new THREE.Mesh (forma_geometrica_olho, material_olho);
+olho_esquerdo.position.set(-0.09, 0.08, 1.15);
+
+cena.add(olho_direito)
+cena.add(olho_esquerdo)
+
+//////////////////////////////////////////////////////
+//nariz:
+// 1. Criar uma forma triangular 2D
+const formaTriangular = new THREE.Shape();
+formaTriangular.moveTo(0, 0);
+formaTriangular.lineTo(0.1, 0);
+formaTriangular.lineTo(0.1, 0.1);
+formaTriangular.lineTo(0, 0); // fecha o triângulo
+
+// 2. Configurar a extrusão (espessura no eixo Z)
+const extrudeConfig = {
+    depth: 0.05,      // espessura
+    bevelEnabled: false // sem bordas chanfradas
+};
+
+// 3. Criar a geometria extrudada
+const geometriaTriangulo = new THREE.ExtrudeGeometry(formaTriangular, extrudeConfig);
+
+// 4. Criar o material
+const material_nariz = new THREE.MeshStandardMaterial({ color: 0x000000 });
+
+// 5. Mesh
+const triangulo = new THREE.Mesh(geometriaTriangulo, material_nariz);
+
+// 6. Ajustar posição (opcional)
+triangulo.rotation.x = Math.PI ; // para ficar "em pé" na horizontal
+triangulo.position.set(0.07, 0, 1.17); // centraliza melhor
+triangulo.rotation.z = (3.0/4)*Math.PI ; // para ficar "em pé" na horizontal
+
+
+// 7. Adiciona à cena
+cena.add(triangulo);
 
 
 //////////////////////////////////////////////////////
