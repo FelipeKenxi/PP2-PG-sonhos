@@ -191,6 +191,47 @@ cena.add(triangulo);
 
 
 //////////////////////////////////////////////////////
+//orelhas:
+
+const raio_orelha = 0.1
+
+// 1. Criar a geometria de um cilindro (forma circular)
+const forma_geometrica_orelha = new THREE.CylinderGeometry(raio_orelha, raio_orelha, 0.05, 64); 
+// raio topo, raio base, altura (espessura), segmentos
+
+// 2. Criar o material
+const material_orelha = new THREE.MeshStandardMaterial({ color: 0xffff00 });
+
+// 3. Mesh
+const orelha_direita = new THREE.Mesh(forma_geometrica_orelha, material_orelha);
+
+// 4. Achatar no eixo X ou Z para fazer ele mais oval
+orelha_direita.scale.set(1.2, 1, 0.8); // ovalado em X/Z
+
+// 5. (Opcional) Rotacionar para deitar
+orelha_direita.rotation.x = Math.PI / 2;
+orelha_direita.rotation.y = Math.PI /4;
+
+const orelha_esquerda = orelha_direita.clone();
+orelha_esquerda.rotation.y = -Math.PI/4;
+
+orelha_esquerda.position.set(0.17, 0.18, 1);
+orelha_esquerda.position.set(-.17, 0.18, 1); 
+
+orelha_direita.position.set(0.17, 0.18, 1);
+orelha_direita.position.set(.17, 0.18, 1); 
+
+
+
+// 6. Adicionar à cena
+cena.add(orelha_direita);
+cena.add(orelha_esquerda);
+
+
+
+
+
+//////////////////////////////////////////////////////
 //para dar controle:
 const controle = new OrbitControls (camera, renderizador.domElement);
 controle.enableDamping = true;
