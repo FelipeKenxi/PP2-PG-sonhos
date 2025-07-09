@@ -30,7 +30,7 @@ cena.add(eixos);
 // primitiva geométrica para o corpo:
 const raio_corpo = 1; 
 const detalhe_corpo = 4; //quanto maior mais faces
-const material = new THREE.MeshStandardMaterial({
+const material_corpo = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     flatShading: true
 });
@@ -40,7 +40,7 @@ const material = new THREE.MeshStandardMaterial({
 const forma_geometrica_corpo = new THREE.TetrahedronGeometry(raio_corpo, detalhe_corpo); 
 
 // mesh combinando forma e material
-const corpo = new THREE.Mesh(forma_geometrica_corpo, material);
+const corpo = new THREE.Mesh(forma_geometrica_corpo, material_corpo);
 corpo.position.set(0, 0, 0);
 
 // achatando nos eixos 
@@ -69,6 +69,25 @@ cena.add(cabeca);
 //////////////////////////////////////////////////////
 // "chapeuzinho" de lã:
 
+const raio_chapeuzinho = 0.2;
+const detalhe_chapeuzinho = detalhe_corpo;
+
+// primitiva geométrica: Tetraedro com mais detalhes
+const forma_geometrica_chapeuzinho = new THREE.TetrahedronGeometry(raio_chapeuzinho, detalhe_chapeuzinho); 
+
+// mesh combinando forma e material
+const chapeuzinho = new THREE.Mesh(forma_geometrica_chapeuzinho, material_corpo);
+
+// achatando nos eixos 
+chapeuzinho.scale.set(0.8, 0.4, 1); 
+
+// posicionando 
+chapeuzinho.position.set(0, 0.2, 0.95);
+
+// adicionar à cena
+cena.add(chapeuzinho);
+
+
 //////////////////////////////////////////////////////
 // "rabinho" de lã:
 
@@ -79,7 +98,7 @@ const detalhe_rabinho = detalhe_corpo;
 const forma_geometrica_rabinho = new THREE.TetrahedronGeometry(raio_rabinho, detalhe_rabinho); 
 
 // mesh combinando forma e material
-const rabinho = new THREE.Mesh(forma_geometrica_rabinho, material);
+const rabinho = new THREE.Mesh(forma_geometrica_rabinho, material_corpo);
 rabinho.position.set(0, 0, 0);
 
 // achatando nos eixos 
@@ -192,7 +211,6 @@ cena.add(triangulo);
 
 //////////////////////////////////////////////////////
 //orelhas:
-
 const raio_orelha = 0.1
 
 // 1. Criar a geometria de um cilindro (forma circular)
@@ -200,7 +218,7 @@ const forma_geometrica_orelha = new THREE.CylinderGeometry(raio_orelha, raio_ore
 // raio topo, raio base, altura (espessura), segmentos
 
 // 2. Criar o material
-const material_orelha = new THREE.MeshStandardMaterial({ color: 0xffff00 });
+const material_orelha = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
 // 3. Mesh
 const orelha_direita = new THREE.Mesh(forma_geometrica_orelha, material_orelha);
@@ -209,7 +227,7 @@ const orelha_direita = new THREE.Mesh(forma_geometrica_orelha, material_orelha);
 orelha_direita.scale.set(1.2, 1, 0.8); // ovalado em X/Z
 
 // 5. (Opcional) Rotacionar para deitar
-orelha_direita.rotation.x = Math.PI / 2;
+orelha_direita.rotation.x = Math.PI /2;
 orelha_direita.rotation.y = Math.PI /4;
 
 const orelha_esquerda = orelha_direita.clone();
@@ -225,6 +243,41 @@ orelha_direita.position.set(.17, 0.18, 1);
 cena.add(orelha_direita);
 cena.add(orelha_esquerda);
 
+//////////////////////////////////////////////////////
+//parte preta da pata:
+
+
+//////////////////////////////////////////////////////
+//dentro da orelha:
+const raio_dentro_orelha = 0.08
+
+// 1. Criar a geometria de um cilindro (forma circular)
+const forma_geometrica_dentro_orelha = new THREE.CylinderGeometry(raio_dentro_orelha, raio_dentro_orelha, 0.05, 64); 
+// raio topo, raio base, altura (espessura), segmentos
+
+// 2. Criar o material
+const material_dentro_orelha = new THREE.MeshStandardMaterial({ color: 0xff5cba });
+
+// 3. Mesh
+const dentro_orelha_direita = new THREE.Mesh(forma_geometrica_dentro_orelha, material_dentro_orelha);
+
+// 4. Achatar no eixo X ou Z para fazer ele mais oval
+dentro_orelha_direita.scale.set(1.2, 1, 0.8); // ovalado em X/Z
+
+// 5. (Opcional) Rotacionar para deitar
+dentro_orelha_direita.rotation.x = Math.PI /2;
+dentro_orelha_direita.rotation.y = Math.PI /4;
+
+const dentro_orelha_esquerda = dentro_orelha_direita.clone();
+dentro_orelha_esquerda.rotation.y = -Math.PI/4;
+
+dentro_orelha_esquerda.position.set(-0.17, 0.18, 1.01); 
+
+dentro_orelha_direita.position.set(0.17, 0.18, 1.01); 
+
+// 6. Adicionar à cena
+cena.add(dentro_orelha_direita);
+cena.add(dentro_orelha_esquerda);
 
 //////////////////////////////////////////////////////
 //para dar controle:
