@@ -221,14 +221,9 @@ orelha_esquerda.position.set(-.17, 0.18, 1);
 orelha_direita.position.set(0.17, 0.18, 1);
 orelha_direita.position.set(.17, 0.18, 1); 
 
-
-
 // 6. Adicionar à cena
 cena.add(orelha_direita);
 cena.add(orelha_esquerda);
-
-
-
 
 
 //////////////////////////////////////////////////////
