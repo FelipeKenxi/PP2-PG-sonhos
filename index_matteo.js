@@ -19,6 +19,7 @@ camera.position.z = 2; //para dar uma afastada e conseguir ver, algo assim
 
 // criando a cena:
 const cena = new THREE.Scene();
+cena.background = new THREE.Color(0xeeeeee); // cinza claro, por exemplo
 
 const tamanho = 2; // tamanho das linhas dos eixos
 const eixos = new THREE.AxesHelper(tamanho);
@@ -167,10 +168,10 @@ const material_olho = new THREE.MeshStandardMaterial({
 
 
 const olho_direito = new THREE.Mesh (forma_geometrica_olho, material_olho);
-olho_direito.position.set(0.09, 0.08, 1.15);
+olho_direito.position.set(0.09, 0.08, 1.1);
 
 const olho_esquerdo = new THREE.Mesh (forma_geometrica_olho, material_olho);
-olho_esquerdo.position.set(-0.09, 0.08, 1.15);
+olho_esquerdo.position.set(-0.09, 0.08, 1.1);
 
 cena.add(olho_direito)
 cena.add(olho_esquerdo)
@@ -201,7 +202,7 @@ const triangulo = new THREE.Mesh(geometriaTriangulo, material_nariz);
 
 // 6. Ajustar posição (opcional)
 triangulo.rotation.x = Math.PI ; // para ficar "em pé" na horizontal
-triangulo.position.set(0.07, 0, 1.17); // centraliza melhor
+triangulo.position.set(0.07, 0, 1.16); // centraliza melhor
 triangulo.rotation.z = (3.0/4)*Math.PI ; // para ficar "em pé" na horizontal
 
 
@@ -245,6 +246,42 @@ cena.add(orelha_esquerda);
 
 //////////////////////////////////////////////////////
 //parte preta da pata:
+const coord_x_pe = 0.4;
+const coord_y_pe = 0.7;
+const coord_z_pe = 0.3;
+
+// para a pata1:
+const forma_geometrica_pe = new THREE.CylinderGeometry(0.105, 0.105, 0.1, 16);
+const material_pe = new THREE.MeshStandardMaterial({
+    color: 0x000000,
+    flatShading: true
+});
+const pe1 = new THREE.Mesh(forma_geometrica_pe, material_pe);
+pe1.position.y = -coord_y_pe;
+pe1.position.z = -coord_z_pe;
+pe1.position.x = coord_x_pe;
+cena.add(pe1);
+
+// para a pata2:
+const pe2 = new THREE.Mesh(forma_geometrica_pe, material_pe);
+pe2.position.y = -coord_y_pe;
+pe2.position.z = -coord_z_pe;
+pe2.position.x = -coord_x_pe;
+cena.add(pe2);
+
+// para a pata3:
+const pe3 = new THREE.Mesh(forma_geometrica_pe, material_pe);
+pe3.position.y = -coord_y_pe;
+pe3.position.z = coord_z_pe;
+pe3.position.x = coord_x_pe;
+cena.add(pe3);
+
+// para a pata4:
+const pe4 = new THREE.Mesh(forma_geometrica_pe, material_pe);
+pe4.position.y = -coord_y_pe;
+pe4.position.z = coord_z_pe;
+pe4.position.x = -coord_x_pe;
+cena.add(pe4);
 
 
 //////////////////////////////////////////////////////
