@@ -1,7 +1,6 @@
 import * as THREE from "three"; //para importar a biblioteca three do javascript
 import { OrbitControls } from "jsm/controls/OrbitControls.js";
 
-
 // criando um renderizador:
 const largura = window.innerWidth;
 const altura = window.innerHeight;
@@ -29,27 +28,30 @@ cena.add(eixos);
 //////////////////////////////////////////////////////
 // para o corpo:
 // primitiva geométrica para o corpo:
-const raio_corpo = 1; 
-const detalhe_corpo = 4; //quanto maior mais faces
 const material_corpo = new THREE.MeshStandardMaterial({
     color: 0xffffff,
-    flatShading: true
+    flatShading: true,
 });
 
+const raio_corpo =  0.05;  
+const tubeRadius =  0.75;  
+const radialSegments =  3;  
+const tubularSegments =  57;  
+const p = 10;  
+const q = 14; 
 
 // primitiva geométrica: Tetraedro com mais detalhes
-const forma_geometrica_corpo = new THREE.TetrahedronGeometry(raio_corpo, detalhe_corpo); 
+const forma_geometrica_corpo = new THREE.TorusKnotGeometry(raio_corpo, tubeRadius, tubularSegments, radialSegments, p, q );
 
 // mesh combinando forma e material
 const corpo = new THREE.Mesh(forma_geometrica_corpo, material_corpo);
-corpo.position.set(0, 0, 0);
+corpo.position.set(0, -0.12, 0);
 
 // achatando nos eixos 
-corpo.scale.set(0.8, 0.7, 0.85); // X = 0.6, Y = 0.6, Z = 1
+corpo.scale.set(1, 0.8, 1); 
 
 // adicionar à cena
-cena.add(corpo);
-
+cena.add(corpo)
 
 //////////////////////////////////////////////////////
 // para a cabeça:
@@ -62,7 +64,7 @@ const material_cabeca = new THREE.MeshStandardMaterial({
 
 
 const cabeca = new THREE.Mesh (forma_geometrica_cabeca, material_cabeca);
-cabeca.position.set(0, 0, 0.9);
+cabeca.position.set(0, 0.15, 0.65);
 cabeca.scale.set(0.6, 0.6, 0.65); //para achatar a cabeça
 
 cena.add(cabeca);
@@ -70,49 +72,57 @@ cena.add(cabeca);
 //////////////////////////////////////////////////////
 // "chapeuzinho" de lã:
 
-const raio_chapeuzinho = 0.2;
-const detalhe_chapeuzinho = detalhe_corpo;
+const raio_chapeuzinho = 0.3;
+const tubeRadius_chapeuzinho =  0.75;  
+const radialSegments_chapeuzinho =  3;  
+const tubularSegments_chapeuzinho =  57;  
+const p_chapeuzinho = 10;  
+const q_chapeuzinho = 14; 
 
 // primitiva geométrica: Tetraedro com mais detalhes
-const forma_geometrica_chapeuzinho = new THREE.TetrahedronGeometry(raio_chapeuzinho, detalhe_chapeuzinho); 
+const forma_geometrica_chapeuzinho = new THREE.TorusKnotGeometry(raio_chapeuzinho, tubeRadius_chapeuzinho, tubularSegments_chapeuzinho, radialSegments_chapeuzinho, p_chapeuzinho, q_chapeuzinho );
 
 // mesh combinando forma e material
 const chapeuzinho = new THREE.Mesh(forma_geometrica_chapeuzinho, material_corpo);
 
 // achatando nos eixos 
-chapeuzinho.scale.set(0.8, 0.4, 1); 
+chapeuzinho.scale.set(0.3, 0.2, 0.3); 
 
 // posicionando 
-chapeuzinho.position.set(0, 0.2, 0.95);
+chapeuzinho.position.set(0, 0.35, 0.08);
 
 // adicionar à cena
-cena.add(chapeuzinho);
-
+cabeca.add(chapeuzinho);
 
 //////////////////////////////////////////////////////
 // "rabinho" de lã:
 
-const raio_rabinho = 0.2;
-const detalhe_rabinho = detalhe_corpo;
+const raio_rabinho = 0.1;
+const tubeRadius_rabinho =  0.1;  
+const radialSegments_rabinho =  3;  
+const tubularSegments_rabinho =  57;  
+const p_rabinho = 10;  
+const q_rabinho = 14; 
 
 // primitiva geométrica: Tetraedro com mais detalhes
-const forma_geometrica_rabinho = new THREE.TetrahedronGeometry(raio_rabinho, detalhe_rabinho); 
+const forma_geometrica_rabinho = new THREE.TorusKnotGeometry(raio_rabinho, tubeRadius_rabinho, tubularSegments_rabinho, radialSegments_rabinho, p_rabinho, q_rabinho );
 
 // mesh combinando forma e material
 const rabinho = new THREE.Mesh(forma_geometrica_rabinho, material_corpo);
 rabinho.position.set(0, 0, 0);
 
 // achatando nos eixos 
-rabinho.scale.set(0.8, 0.8, 0.8); // X = 0.6, Y = 0.6, Z = 1
+rabinho.scale.set(0.8, 0.8, 0.8); 
 
 // posicionando 
 rabinho.position.set(0, 0, -0.8);
 
-// adicionar à cena
-cena.add(rabinho);
+// adicionar ao corpo 
+corpo.add(rabinho);
 
 //////////////////////////////////////////////////////
 // para dar uma luz:
+
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000); //em cima branco e em baixo preto
 cena.add(hemiLight); //adicionando à cena
 
@@ -120,9 +130,9 @@ cena.add(hemiLight); //adicionando à cena
 // patas:
 
 // para auxiliar as patas:
-const coord_x_pata = 0.4;
+const coord_x_pata = 0.25;
 const coord_y_pata = 0.5;
-const coord_z_pata = 0.3;
+const coord_z_pata = 0.2;
 
 // para a pata1:
 const forma_geometrica_pata = new THREE.CylinderGeometry(0.1, 0.1, 0.35, 16);
@@ -168,13 +178,13 @@ const material_olho = new THREE.MeshStandardMaterial({
 
 
 const olho_direito = new THREE.Mesh (forma_geometrica_olho, material_olho);
-olho_direito.position.set(0.09, 0.08, 1.1);
+olho_direito.position.set(0.09, 0.09, 0.35);
 
 const olho_esquerdo = new THREE.Mesh (forma_geometrica_olho, material_olho);
-olho_esquerdo.position.set(-0.09, 0.08, 1.1);
+olho_esquerdo.position.set(-0.09, 0.09, 0.35);
 
-cena.add(olho_direito)
-cena.add(olho_esquerdo)
+cabeca.add(olho_direito)
+cabeca.add(olho_esquerdo)
 
 //////////////////////////////////////////////////////
 //nariz:
@@ -202,17 +212,17 @@ const triangulo = new THREE.Mesh(geometriaTriangulo, material_nariz);
 
 // 6. Ajustar posição (opcional)
 triangulo.rotation.x = Math.PI ; // para ficar "em pé" na horizontal
-triangulo.position.set(0.07, 0, 1.16); // centraliza melhor
+triangulo.position.set(0.07, 0, 0.4); // centraliza melhor
 triangulo.rotation.z = (3.0/4)*Math.PI ; // para ficar "em pé" na horizontal
 
 
 // 7. Adiciona à cena
-cena.add(triangulo);
+cabeca.add(triangulo);
 
 
 //////////////////////////////////////////////////////
 //orelhas:
-const raio_orelha = 0.1
+const raio_orelha = 0.17
 
 // 1. Criar a geometria de um cilindro (forma circular)
 const forma_geometrica_orelha = new THREE.CylinderGeometry(raio_orelha, raio_orelha, 0.05, 64); 
@@ -230,25 +240,27 @@ orelha_direita.scale.set(1.2, 1, 0.8); // ovalado em X/Z
 // 5. (Opcional) Rotacionar para deitar
 orelha_direita.rotation.x = Math.PI /2;
 orelha_direita.rotation.y = Math.PI /4;
+orelha_direita.rotation.y =  1* Math.PI ;
+
 
 const orelha_esquerda = orelha_direita.clone();
 orelha_esquerda.rotation.y = -Math.PI/4;
+orelha_esquerda.rotation.y =  -1* Math.PI ;
 
-orelha_esquerda.position.set(0.17, 0.18, 1);
-orelha_esquerda.position.set(-.17, 0.18, 1); 
 
-orelha_direita.position.set(0.17, 0.18, 1);
-orelha_direita.position.set(.17, 0.18, 1); 
+orelha_esquerda.position.set(-0.3, 0.3, 0.1);
+
+orelha_direita.position.set(0.3, 0.3, 0.1); 
 
 // 6. Adicionar à cena
-cena.add(orelha_direita);
-cena.add(orelha_esquerda);
+cabeca.add(orelha_direita);
+cabeca.add(orelha_esquerda);
 
 //////////////////////////////////////////////////////
 //parte preta da pata:
-const coord_x_pe = 0.4;
+const coord_x_pe = 0.25;
 const coord_y_pe = 0.7;
-const coord_z_pe = 0.3;
+const coord_z_pe = 0.2;
 
 // para a pata1:
 const forma_geometrica_pe = new THREE.CylinderGeometry(0.105, 0.105, 0.1, 16);
@@ -286,7 +298,7 @@ cena.add(pe4);
 
 //////////////////////////////////////////////////////
 //dentro da orelha:
-const raio_dentro_orelha = 0.08
+const raio_dentro_orelha = 0.128
 
 // 1. Criar a geometria de um cilindro (forma circular)
 const forma_geometrica_dentro_orelha = new THREE.CylinderGeometry(raio_dentro_orelha, raio_dentro_orelha, 0.05, 64); 
@@ -303,18 +315,18 @@ dentro_orelha_direita.scale.set(1.2, 1, 0.8); // ovalado em X/Z
 
 // 5. (Opcional) Rotacionar para deitar
 dentro_orelha_direita.rotation.x = Math.PI /2;
-dentro_orelha_direita.rotation.y = Math.PI /4;
+dentro_orelha_direita.rotation.y = 1*Math.PI ;
 
 const dentro_orelha_esquerda = dentro_orelha_direita.clone();
-dentro_orelha_esquerda.rotation.y = -Math.PI/4;
+dentro_orelha_esquerda.rotation.y = -1 * Math.PI;
 
-dentro_orelha_esquerda.position.set(-0.17, 0.18, 1.01); 
+dentro_orelha_esquerda.position.set(-0.3, 0.3, 0.11); 
 
-dentro_orelha_direita.position.set(0.17, 0.18, 1.01); 
+dentro_orelha_direita.position.set(0.3, 0.3, 0.11); 
 
 // 6. Adicionar à cena
-cena.add(dentro_orelha_direita);
-cena.add(dentro_orelha_esquerda);
+cabeca.add(dentro_orelha_direita);
+cabeca.add(dentro_orelha_esquerda);
 
 //////////////////////////////////////////////////////
 //para dar controle:
