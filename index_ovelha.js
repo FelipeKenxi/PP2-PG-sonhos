@@ -24,6 +24,9 @@ const tamanho = 2; // tamanho das linhas dos eixos
 const eixos = new THREE.AxesHelper(tamanho);
 cena.add(eixos);
 
+//////////////////////////////////////////////////////
+// para agrupar:
+const ovelha = new THREE.Group();
 
 //////////////////////////////////////////////////////
 // para o corpo:
@@ -51,7 +54,7 @@ corpo.position.set(0, -0.12, 0);
 corpo.scale.set(1, 0.8, 1); 
 
 // adicionar à cena
-cena.add(corpo)
+//cena.add(corpo)
 
 //////////////////////////////////////////////////////
 // para a cabeça:
@@ -67,7 +70,7 @@ const cabeca = new THREE.Mesh (forma_geometrica_cabeca, material_cabeca);
 cabeca.position.set(0, 0.15, 0.65);
 cabeca.scale.set(0.6, 0.6, 0.65); //para achatar a cabeça
 
-cena.add(cabeca);
+//cena.add(cabeca);
 
 //////////////////////////////////////////////////////
 // "chapeuzinho" de lã:
@@ -144,28 +147,32 @@ const pata1 = new THREE.Mesh(forma_geometrica_pata, material_pata);
 pata1.position.y = -coord_y_pata;
 pata1.position.z = -coord_z_pata;
 pata1.position.x = coord_x_pata;
-cena.add(pata1);
+//cena.add(pata1);
 
 // para a pata2:
 const pata2 = new THREE.Mesh(forma_geometrica_pata, material_pata);
 pata2.position.y = -coord_y_pata;
 pata2.position.z = -coord_z_pata;
 pata2.position.x = -coord_x_pata;
-cena.add(pata2);
+//cena.add(pata2);
 
 // para a pata3:
 const pata3 = new THREE.Mesh(forma_geometrica_pata, material_pata);
 pata3.position.y = -coord_y_pata;
 pata3.position.z = coord_z_pata;
 pata3.position.x = coord_x_pata;
-cena.add(pata3);
+//cena.add(pata3);
 
 // para a pata4:
 const pata4 = new THREE.Mesh(forma_geometrica_pata, material_pata);
 pata4.position.y = -coord_y_pata;
 pata4.position.z = coord_z_pata;
 pata4.position.x = -coord_x_pata;
-cena.add(pata4);
+//cena.add(pata4);
+ovelha.add(pata1);
+ovelha.add(pata2);
+ovelha.add(pata3);
+ovelha.add(pata4);
 
 //////////////////////////////////////////////////////
 //olhos:
@@ -272,29 +279,32 @@ const pe1 = new THREE.Mesh(forma_geometrica_pe, material_pe);
 pe1.position.y = -coord_y_pe;
 pe1.position.z = -coord_z_pe;
 pe1.position.x = coord_x_pe;
-cena.add(pe1);
+//cena.add(pe1);
 
 // para a pata2:
 const pe2 = new THREE.Mesh(forma_geometrica_pe, material_pe);
 pe2.position.y = -coord_y_pe;
 pe2.position.z = -coord_z_pe;
 pe2.position.x = -coord_x_pe;
-cena.add(pe2);
+//cena.add(pe2);
 
 // para a pata3:
 const pe3 = new THREE.Mesh(forma_geometrica_pe, material_pe);
 pe3.position.y = -coord_y_pe;
 pe3.position.z = coord_z_pe;
 pe3.position.x = coord_x_pe;
-cena.add(pe3);
+//cena.add(pe3);
 
 // para a pata4:
 const pe4 = new THREE.Mesh(forma_geometrica_pe, material_pe);
 pe4.position.y = -coord_y_pe;
 pe4.position.z = coord_z_pe;
 pe4.position.x = -coord_x_pe;
-cena.add(pe4);
-
+//cena.add(pe4);
+ovelha.add(pe1);
+ovelha.add(pe2);
+ovelha.add(pe3);
+ovelha.add(pe4);
 
 //////////////////////////////////////////////////////
 //dentro da orelha:
@@ -333,6 +343,10 @@ cabeca.add(dentro_orelha_esquerda);
 const controle = new OrbitControls (camera, renderizador.domElement);
 controle.enableDamping = true;
 controle.dampingFactor = 0.03;
+
+ovelha.add(cabeca);
+ovelha.add(corpo);
+cena.add(ovelha);
 
 // função que anima e renderiza:
 animate();

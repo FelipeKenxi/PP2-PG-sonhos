@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "jsm/controls/OrbitControls.js";
+import { criarOvelha } from './cria_ovelha.js';
+
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -16,7 +18,6 @@ camera.position.y = 30;
 camera.position.x = 0;
 camera.lookAt(0, 0, 0);
 const scene = new THREE.Scene();
-
 
 
 
@@ -68,7 +69,8 @@ const cercaMesh = new THREE.Mesh(cerca, cercaMat);
 cercaMesh.position.z = 25;
 scene.add(cercaMesh);
 scene.add(invis);
-invis.add(mesh);
+const ovelha = criarOvelha();
+invis.add(ovelha);
 mesh.rotation.x = 90;
 mesh.position.x = invis.position.x + 20;
 
