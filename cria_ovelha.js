@@ -64,6 +64,9 @@ export function criarOvelha() {
     // posicionando 
     chapeuzinho.position.set(0, 0.35, 0.08);
 
+    //adicionando
+    cabeca.add(chapeuzinho);
+
     //////////////////////////////////////////////////////
     // "rabinho" de lã:
 
