@@ -48,8 +48,11 @@ scene.add(invis);
 const cercaMesh = criarCerca();
 cercaMesh.position.z = 25; // mesma posição que antes
 scene.add(cercaMesh);
-cercaMesh.scale.set(7, 7, 7);
+cercaMesh.scale.set(5, 7, 7);
 cercaMesh.rotation.y = (-Math.PI / 2) + Math.PI / 5;
+cercaMesh.position.z = 15;
+
+
 
 
 
