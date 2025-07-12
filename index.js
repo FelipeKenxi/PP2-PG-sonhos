@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "jsm/controls/OrbitControls.js";
 import { criarOvelha } from './cria_ovelha.js';
+import { criarCerca } from './cria_cerca.js';
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -43,19 +44,21 @@ const invisMat = new THREE.MeshBasicMaterial({
 const invis = new THREE.Mesh(invisGeo, invisMat);
 scene.add(invis);
 
-// Cerca
-const cerca = new THREE.BoxGeometry(3.0, 3.0, 8.0);
-const cercaMat = new THREE.MeshBasicMaterial({ color: 0x1166ff });
-const cercaMesh = new THREE.Mesh(cerca, cercaMat);
-cercaMesh.position.z = 25;
+// Criação da cerca via função
+const cercaMesh = criarCerca();
+cercaMesh.position.z = 25; // mesma posição que antes
 scene.add(cercaMesh);
+cercaMesh.scale.set(7, 7, 7);
+cercaMesh.rotation.y = (-Math.PI / 2) + Math.PI / 5;
+
+
 
 // Criação da ovelha
 const ovelha = criarOvelha();
 ovelha.scale.set(7, 7, 7);
 ovelha.rotation.y = -Math.PI / 2;
 ovelha.position.x = invis.position.x + 20;
-ovelha.position.y = 3; // ou 6, 7... depende do modelo
+ovelha.position.y = 3;
 invis.add(ovelha);
 
 // Luz
