@@ -3,6 +3,8 @@ import { OrbitControls } from "jsm/controls/OrbitControls.js";
 import { criarOvelha } from './cria_ovelha.js';
 import { criarCerca } from './cria_cerca.js';
 
+let ultimaPosicao = new THREE.Vector3(); // Para armazenar a posição anterior
+
 const w = window.innerWidth;
 const h = window.innerHeight;
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -50,9 +52,7 @@ cercaMesh.position.z = 25; // mesma posição que antes
 scene.add(cercaMesh);
 cercaMesh.scale.set(5, 7, 7);
 cercaMesh.rotation.y = (-Math.PI / 2) + Math.PI / 5;
-cercaMesh.position.z = 15;
-
-
+cercaMesh.position.z = 15
 
 
 
@@ -78,6 +78,20 @@ let originalY = ovelha.position.y;
 
 function animate() {
     invis.rotateY(-0.004);
+
+    // 1. Pega a nova posição da ovelha
+    const posAtual = new THREE.Vector3();
+    ovelha.getWorldPosition(posAtual);
+
+    // 2. Calcula a direção da tangente (movimento)
+    const direcao = new THREE.Vector3().subVectors(posAtual, ultimaPosicao).normalize();
+
+    // 3. Define para onde ela deve olhar (frente da tangente)
+    const novoAlvo = new THREE.Vector3().addVectors(posAtual, direcao);
+    ovelha.lookAt(novoAlvo);
+
+    // 4. Atualiza a posição anterior
+    ultimaPosicao.copy(posAtual);
 
     const ovelhaWorldPos = new THREE.Vector3();
     ovelha.getWorldPosition(ovelhaWorldPos);
@@ -120,6 +134,9 @@ function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
+
+ovelha.getWorldPosition(ultimaPosicao);
+
 animate();
 
 window.mudarCamera = mudarCamera;
