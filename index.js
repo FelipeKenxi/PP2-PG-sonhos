@@ -16,10 +16,10 @@ const aspect = w / h;
 const near = 0.1;
 const far = 1000;
 var camera1 = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera1.position.set(0, 30, 30);
+camera1.position.set(25, 60, -40);
 camera1.lookAt(0, 0, 0);
 
-var camera2 = new THREE.PerspectiveCamera(fov, aspect, near, far);
+var camera2 = new THREE.PerspectiveCamera(fov, aspect, near, 20);
 camera2.position.set(0, 0, 50);
 camera2.lookAt(0, 0, 0);
 
@@ -53,29 +53,20 @@ const cercaMesh = criarCerca();
 cercaMesh.position.z = 25; // mesma posição que antes
 scene.add(cercaMesh);
 cercaMesh.scale.set(5, 7, 7);
-cercaMesh.rotation.y = (-Math.PI / 2) + Math.PI / 5;
-cercaMesh.position.z = 15;
+cercaMesh.rotation.y = Math.PI / 2;
+cercaMesh.position.set(0, 0, 35);
 
 
 // Criação da ovelha
 const ovelha = criarOvelha();
 ovelha.scale.set(7, 7, 7);
 ovelha.rotation.y = -Math.PI / 2;
-ovelha.position.x = invis.position.x + 20;
-ovelha.position.y = 3;
+ovelha.position.set(0, 0, -35);
 invis.add(ovelha);
 
 // Luz
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccc6a5);
 scene.add(hemiLight);
-
-// Pulo
-let isJumping = false;
-let jumpUp = true;
-let stayAir = false;
-let jumpSpeed = 0.05;
-let maxJumpHeight = 12;
-let originalY = ovelha.position.y;
 
 
 // Shaders
@@ -201,8 +192,22 @@ scene.add(shaderMeshNuvens2);
 
 const clock = new THREE.Clock();
 
+
+
+
+//Caminho
+const pontos = [
+    new THREE.Vector3(0,0,-35),
+    new THREE.Vector3(35,0,0),
+    new THREE.Vector3(15,0,31.62),
+    new THREE.Vector3(0,10,35),
+    new THREE.Vector3(-15,0,31.62),
+    new THREE.Vector3(-35,0,0)
+];
+const caminho =  new THREE.CatmullRomCurve3(pontos, true);
+
 function animate() {
-    invis.rotateY(-0.004);
+    //invis.rotateY(-0.004);
 
     // 1. Pega a nova posição da ovelha
     const posAtual = new THREE.Vector3();
@@ -215,10 +220,18 @@ function animate() {
     const novoAlvo = new THREE.Vector3().addVectors(posAtual, direcao);
     ovelha.lookAt(novoAlvo);
 
+    // caminho e Pulo
+    const time = Date.now();
+    const t = (time / 2000 % 7) / 7;
+    console.log(t);
+    const posicao_ovelha1 = caminho.getPointAt((t+0.001)%1);
+    ovelha.position.copy(posicao_ovelha1);
+
+
     // 4. Atualiza a posição anterior
     ultimaPosicao.copy(posAtual);
 
-    const ovelhaWorldPos = new THREE.Vector3();
+    /*const ovelhaWorldPos = new THREE.Vector3();
     ovelha.getWorldPosition(ovelhaWorldPos);
 
     const cercaWorldPos = new THREE.Vector3();
@@ -255,6 +268,7 @@ function animate() {
             stayAir = false;
         }
     }
+        */
 
     // Atualização dos Shaders por frame
     const elapsedTime = clock.getElapsedTime();
