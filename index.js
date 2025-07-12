@@ -15,24 +15,26 @@ const fov = 75;
 const aspect = w / h;
 const near = 0.1;
 const far = 1000;
-let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.set(0, 30, 30);
-camera.lookAt(0, 0, 0);
+var camera1 = new THREE.PerspectiveCamera(fov, aspect, near, far);
+camera1.position.set(0, 30, 30);
+camera1.lookAt(0, 0, 0);
+
+var camera2 = new THREE.PerspectiveCamera(fov, aspect, near, far);
+camera2.position.set(0, 0, 50);
+camera2.lookAt(0, 0, 0);
+
+var camera_atual = camera1;
+var CameraAtual = 1;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xeeeeee);
+scene.background = new THREE.Color(0x2c3a63);
 
-let CameraAtual = 1;
 function mudarCamera() {
     if (CameraAtual == 1) {
-        camera = new THREE.PerspectiveCamera(fov, aspect, near, 1000);
-        camera.position.set(0, 0, 50);
-        camera.lookAt(0, 0, 0);
+        camera_atual = camera2;
         CameraAtual = 2;
     } else {
-        camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        camera.position.set(0, 30, 30);
-        camera.lookAt(0, 0, 0);
+        camera_atual = camera1;
         CameraAtual = 1;
     }
 }
@@ -52,8 +54,7 @@ cercaMesh.position.z = 25; // mesma posição que antes
 scene.add(cercaMesh);
 cercaMesh.scale.set(5, 7, 7);
 cercaMesh.rotation.y = (-Math.PI / 2) + Math.PI / 5;
-cercaMesh.position.z = 15
-
+cercaMesh.position.z = 15;
 
 
 // Criação da ovelha
@@ -65,7 +66,7 @@ ovelha.position.y = 3;
 invis.add(ovelha);
 
 // Luz
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0xff0000);
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccc6a5);
 scene.add(hemiLight);
 
 // Pulo
@@ -132,7 +133,7 @@ function animate() {
     }
 
     requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+    renderer.render( scene, camera_atual );
 }
 
 ovelha.getWorldPosition(ultimaPosicao);
