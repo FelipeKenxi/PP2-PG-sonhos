@@ -12,10 +12,10 @@ export function criarCerca() {
     //////////////////////////////////////////////////////
     // carregar textura de madeira:
     const loader = new THREE.TextureLoader();
-    const texturaMadeira = loader.load('texturas/madeira.jpg'); // coloque a textura aqui
+    const texturaMadeira = loader.load('texturas/madeira.jpg');
     texturaMadeira.wrapS = THREE.RepeatWrapping;
     texturaMadeira.wrapT = THREE.RepeatWrapping;
-    texturaMadeira.repeat.set(1, 1); // ajuste conforme necessário
+    texturaMadeira.repeat.set(1, 1);
 
     const material_tabua = new THREE.MeshStandardMaterial({
         map: texturaMadeira,

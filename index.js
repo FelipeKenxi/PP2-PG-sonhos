@@ -29,6 +29,29 @@ var CameraAtual = 1;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x2c3a63);
 
+// chão com grama
+const loader = new THREE.TextureLoader();
+const texturaGrama = loader.load('texturas/grama.jpg');
+
+texturaGrama.wrapS = THREE.RepeatWrapping;
+texturaGrama.wrapT = THREE.RepeatWrapping;
+texturaGrama.repeat.set(10, 10); // repete a textura várias vezes
+
+const planoChao = new THREE.CircleGeometry(120, 64);
+
+const materialChao = new THREE.MeshStandardMaterial({
+  map: texturaGrama,
+  roughness: 1,
+  metalness: 0,
+  side: THREE.DoubleSide
+});
+
+const chao = new THREE.Mesh(planoChao, materialChao);
+chao.rotation.x = -Math.PI / 2;
+chao.position.set(-25, -5, 65);
+
+scene.add(chao);
+
 function mudarCamera() {
     if (CameraAtual == 1) {
         camera_atual = camera2;
