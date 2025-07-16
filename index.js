@@ -3,7 +3,8 @@ import { OrbitControls } from "jsm/controls/OrbitControls.js";
 import { criarOvelha } from './cria_ovelha.js';
 import { criarCerca } from './cria_cerca.js';
 
-let ultimaPosicao = new THREE.Vector3(); // Para armazenar a posição anterior
+let ultimaPosicao1 = new THREE.Vector3(); // Para armazenar a posição anterior
+let ultimaPosicao2 = new THREE.Vector3(); // Para armazenar a posição anterior
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -80,12 +81,19 @@ cercaMesh.rotation.y = Math.PI / 2;
 cercaMesh.position.set(0, 0, 35);
 
 
-// Criação da ovelha
-const ovelha = criarOvelha();
-ovelha.scale.set(7, 7, 7);
-ovelha.rotation.y = -Math.PI / 2;
-ovelha.position.set(0, 0, -35);
-invis.add(ovelha);
+// Criação das ovelhas
+const ovelha1 = criarOvelha();
+ovelha1.scale.set(7, 7, 7);
+ovelha1.rotation.y = -Math.PI / 2;
+ovelha1.position.set(0, 0, -35);
+invis.add(ovelha1);
+
+const ovelha2 = criarOvelha();
+ovelha2.scale.set(5, 5, 5);
+ovelha2.rotation.y = -Math.PI / 2;
+ovelha2.position.set(0, 0, -200);
+invis.add(ovelha2);
+
 
 // Luz
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccc6a5);
@@ -230,68 +238,32 @@ const pontos = [
 const caminho =  new THREE.CatmullRomCurve3(pontos, true);
 
 function animate() {
-    //invis.rotateY(-0.004);
-
-    // 1. Pega a nova posição da ovelha
-    const posAtual = new THREE.Vector3();
-    ovelha.getWorldPosition(posAtual);
-
-    // 2. Calcula a direção da tangente (movimento)
-    const direcao = new THREE.Vector3().subVectors(posAtual, ultimaPosicao).normalize();
-
-    // 3. Define para onde ela deve olhar (frente da tangente)
-    const novoAlvo = new THREE.Vector3().addVectors(posAtual, direcao);
-    ovelha.lookAt(novoAlvo);
-
-    // caminho e Pulo
+    
     const time = Date.now();
     const t = (time / 2000 % 7) / 7;
-    console.log(t);
-    const posicao_ovelha1 = caminho.getPointAt((t+0.001)%1);
-    ovelha.position.copy(posicao_ovelha1);
 
+    // 1. Pega a nova posição da ovelha
+    const posAtual1 = caminho.getPointAt((t + 0.06) % 1);
+    const posAtual2 = caminho.getPointAt((t + 0.001) % 1);
 
-    // 4. Atualiza a posição anterior
-    ultimaPosicao.copy(posAtual);
+    // 2. Calcula a direção da tangente (movimento)
+    const tangente1 = caminho.getTangentAt((t + 0.06) % 1).normalize();
+    const tangente2 = caminho.getTangentAt((t + 0.001) % 1).normalize();
 
-    /*const ovelhaWorldPos = new THREE.Vector3();
-    ovelha.getWorldPosition(ovelhaWorldPos);
+    // 3. Aplica posição
+    ovelha1.position.copy(pos1);
+    ovelha2.position.copy(pos2);
 
-    const cercaWorldPos = new THREE.Vector3();
-    cercaMesh.getWorldPosition(cercaWorldPos);
+    // 4. Define para onde ela deve olhar (frente da tangente)
+    const alvo1 = new THREE.Vector3().addVectors(pos1, tangente1);
+    const alvo2 = new THREE.Vector3().addVectors(pos2, tangente2);
+    ovelha1.lookAt(alvo1);
+    ovelha2.lookAt(alvo2);
 
-    const distancia = ovelhaWorldPos.distanceTo(cercaWorldPos);
-    const distanciaX = Math.abs(ovelhaWorldPos.x - cercaWorldPos.x);
-    console.log(distancia);
-
-    // Inicia o pulo se estiver perto
-    if (distancia < 17 && !isJumping) {
-        isJumping = true;
-        jumpUp = true;
-        stayAir = true;
-    }
-
-    // Controle do pulo
-    if (isJumping) {
-        if (jumpUp) {
-            ovelha.position.y += jumpSpeed;
-            if (ovelha.position.y >= originalY + maxJumpHeight) {
-                jumpUp = false;
-            }
-        } else {
-            if (!stayAir) {
-                ovelha.position.y -= jumpSpeed;
-                if (ovelha.position.y <= originalY) {
-                    ovelha.position.y = originalY;
-                    isJumping = false;
-                }
-            }
-        }
-        if (stayAir && distanciaX > 3) {
-            stayAir = false;
-        }
-    }
-        */
+    // 5. Atualiza a posição anterior
+    ultimaPosicao1.copy(posAtual1);
+    ultimaPosicao2.copy(posAtual2);
+    
 
     // Atualização dos Shaders por frame
     const elapsedTime = clock.getElapsedTime();
@@ -301,7 +273,8 @@ function animate() {
     renderer.render( scene, camera_atual );
 }
 
-ovelha.getWorldPosition(ultimaPosicao);
+ovelha1.getWorldPosition(ultimaPosicao1);
+ovelha2.getWorldPosition(ultimaPosicao2);
 
 animate();
 
