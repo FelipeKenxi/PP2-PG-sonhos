@@ -28,10 +28,13 @@ var camera_atual = camera1;
 var CameraAtual = 1;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x2c3a63);
+
+// fundo com textura de céu estrelado
+const loader = new THREE.TextureLoader();
+const texturaCeu = loader.load('texturas/ceu_estrelado.jpg');
+scene.background = texturaCeu;
 
 // chão com grama
-const loader = new THREE.TextureLoader();
 const texturaGrama = loader.load('texturas/grama.jpg');
 
 texturaGrama.wrapS = THREE.RepeatWrapping;
