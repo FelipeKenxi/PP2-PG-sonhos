@@ -20,7 +20,7 @@ var camera1 = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera1.position.set(25, 60, -40);
 camera1.lookAt(0, 0, 0);
 
-var camera2 = new THREE.PerspectiveCamera(fov, aspect, near, 20);
+var camera2 = new THREE.PerspectiveCamera(fov, aspect, near, 50);
 camera2.position.set(0, 0, 50);
 camera2.lookAt(0, 0, 0);
 
@@ -96,9 +96,13 @@ invis.add(ovelha2);
 
 
 // Luz
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccc6a5);
+const pointLight = new THREE.PointLight(0xffffff, 2.0, 100, 0.2)
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccc6a5, 0.08);
+pointLight.lookAt(0,0,0);
+pointLight.position.copy(cercaMesh.position);
+pointLight.position.y += 50;
+scene.add(pointLight);
 scene.add(hemiLight);
-
 
 // Shaders
 const geometriaShader = new THREE.PlaneGeometry( w/100, h/100);
@@ -251,12 +255,12 @@ function animate() {
     const tangente2 = caminho.getTangentAt((t + 0.001) % 1).normalize();
 
     // 3. Aplica posição
-    ovelha1.position.copy(pos1);
-    ovelha2.position.copy(pos2);
+    ovelha1.position.copy(posAtual1);
+    ovelha2.position.copy(posAtual2);
 
     // 4. Define para onde ela deve olhar (frente da tangente)
-    const alvo1 = new THREE.Vector3().addVectors(pos1, tangente1);
-    const alvo2 = new THREE.Vector3().addVectors(pos2, tangente2);
+    const alvo1 = new THREE.Vector3().addVectors(posAtual1, tangente1);
+    const alvo2 = new THREE.Vector3().addVectors(posAtual2, tangente2);
     ovelha1.lookAt(alvo1);
     ovelha2.lookAt(alvo2);
 
