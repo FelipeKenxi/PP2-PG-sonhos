@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-# PP2-PG
-PP2 para matéria de PG.
-=======
 # Sonhos 3D
 ## Descrição do Projeto
 
@@ -58,7 +54,6 @@ Os valores para algumas reoluções conhecidas:
 | Definição de pelo menos duas câmeras                  | SIM       | Duas câmeras (`camera1` e `camera2`) foram definidas em `index.js`. Há um botão na interface HTML para alternar entre elas.                                                                                                       |
 | Movimento simples de pelo menos um objeto             | SIM       | A ovelha se move continuamente ao longo de um caminho definido por uma `CatmullRomCurve3` e se orienta na direção do movimento. (Responsável: Felipe)                                                                             |
 | Aplicação de textura em pelo menos um objeto          | SIM       | A textura de grama foi aplicada ao `planoChao` e a textura de madeira à cerca (ambas em `index.js` e carregadas em `cria_cerca.js`). (Responsável: Gabriela)          
->>>>>>> Stashed changes
 
 ## Créditos do shader
 O shader criado foi uma adaptação/modificação do código apresentado no vídeo ["Making Clouds in a Shader"](https://youtu.be/hwa6XRXd1xQ?si=nOUUFalA0cVI7pFM) do canal Darko Supe, além de conceitos introduzidos no vídeo ["Three.js Shaders (GLSL) Crash Course For Absolute Beginners"](https://youtu.be/oKbCaj1J6EI?si=noQjfjEsayKIi085) do canal Visionary 3D.                                                             
@@ -74,6 +69,3 @@ Os seguintes materiais foram consultados para o desenvolvimento do projeto:
 * ["Three.js Texture Mapping Tutorial | How to Add Textures to 3D Geometry"](https://www.youtube.com/watch?v=vLz2Rk1r_gQ&ab_channel=SuboptimalEngineer)
 * ["Documentação Three.js"](https://www.youtube.com/watch?v=vLz2Rk1r_gQ&ab_channel=SuboptimalEngineer)
 * ["Primitives"](https://threejs.org/manual/#en/primitives)
-
-
-Para rodar, use o visual studio code com a extensão live server (https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer.
