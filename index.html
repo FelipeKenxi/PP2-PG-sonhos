@@ -3,23 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Getting Started with Three.js</title>
+    <title>Projeto Sonhos - Processamento Gráfico</title>
     <style>
       body {
         margin: 0;
+        overflow: hidden;
+      }
+
+      #botaoCamera {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 10;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+      canvas {
+        display: block;
       }
     </style>
+
     <script type="importmap">
-			{
-				"imports": {
-					"three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
           "jsm/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
         }
-			}
-		</script>
+      }
+    </script>
   </head>
   <body>
-    <button onclick="mudarCamera()">Mudar camera</button>
+    <button id="botaoCamera" onclick="mudarCamera()">Mudar camera</button>
+
     <script type="module" src="index.js"></script>
   </body>
 </html>

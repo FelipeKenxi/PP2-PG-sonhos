@@ -79,7 +79,7 @@ let originalY = ovelha.position.y;
 
 
 // Shaders
-const geometriaShader = new THREE.PlaneGeometry( w/100, h/100);
+const geometriaShader = new THREE.PlaneGeometry( w/70, h/70);
 const materialShaderNuvens = new THREE.RawShaderMaterial({
     transparent: true,
     depthWrite: false,
