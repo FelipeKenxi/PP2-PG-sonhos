@@ -30,6 +30,7 @@ Para visualizar este projeto em seu ambiente local, os seguintes pré-requisitos
 
 Para executar o projeto, siga os passos:
 1) Clone o Repositório. Você pode fazer isto abrindo o Prompt de Comando de digitando:
+    ```bash
     git clone https://github.com/FelipeKenxi/PP2-PG-sonhos.git
 2) Abra o projeto no Visual Studio Code;
 3) Clique com o botão direito no arquivo index.html e selecione "Open with Live Server" (ou clique no ícone "Go Live" na barra inferior). O navegador abrirá automaticamente o projeto.
