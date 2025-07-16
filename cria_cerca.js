@@ -3,11 +3,6 @@ import * as THREE from 'three';
 export function criarCerca() {
     const cerca = new THREE.Group();
 
-    //////////////////////////////////////////////////////
-    // eixos para auxiliar:
-    const tamanho = 2; // tamanho das linhas dos eixos
-    const eixos = new THREE.AxesHelper(tamanho);
-    cerca.add(eixos);
 
     //////////////////////////////////////////////////////
     // carregar textura de madeira:
