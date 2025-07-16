@@ -74,7 +74,7 @@ scene.add(invis);
 
 // Criação da cerca via função
 const cercaMesh = criarCerca();
-cercaMesh.position.z = 25; // mesma posição que antes
+cercaMesh.position.z = 25;
 scene.add(cercaMesh);
 cercaMesh.scale.set(5, 7, 7);
 cercaMesh.rotation.y = Math.PI / 2;
@@ -89,14 +89,14 @@ ovelha1.position.set(0, 0, -35);
 invis.add(ovelha1);
 
 const ovelha2 = criarOvelha();
-ovelha2.scale.set(5, 5, 5);
+ovelha2.scale.set(7, 7, 7);
 ovelha2.rotation.y = -Math.PI / 2;
-ovelha2.position.set(0, 0, -200);
+ovelha2.position.set(0, 0, -35);
 invis.add(ovelha2);
 
 
 // Luz
-const pointLight = new THREE.PointLight(0xffffff, 2.0, 100, 0.2)
+const pointLight = new THREE.PointLight(0xffffff, 3.0, 100, 0.2)
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccc6a5, 0.08);
 pointLight.lookAt(0,0,0);
 pointLight.position.copy(cercaMesh.position);
@@ -228,15 +228,13 @@ scene.add(shaderMeshNuvens2);
 const clock = new THREE.Clock();
 
 
-
-
 //Caminho
 const pontos = [
     new THREE.Vector3(0,0,-35),
     new THREE.Vector3(35,0,0),
-    new THREE.Vector3(15,0,31.62),
+    new THREE.Vector3(15,2,31.62),
     new THREE.Vector3(0,10,35),
-    new THREE.Vector3(-15,0,31.62),
+    new THREE.Vector3(-15,2,31.62),
     new THREE.Vector3(-35,0,0)
 ];
 const caminho =  new THREE.CatmullRomCurve3(pontos, true);
@@ -247,11 +245,11 @@ function animate() {
     const t = (time / 2000 % 7) / 7;
 
     // 1. Pega a nova posição da ovelha
-    const posAtual1 = caminho.getPointAt((t + 0.06) % 1);
+    const posAtual1 = caminho.getPointAt((t + 0.08) % 1);
     const posAtual2 = caminho.getPointAt((t + 0.001) % 1);
 
     // 2. Calcula a direção da tangente (movimento)
-    const tangente1 = caminho.getTangentAt((t + 0.06) % 1).normalize();
+    const tangente1 = caminho.getTangentAt((t + 0.08) % 1).normalize();
     const tangente2 = caminho.getTangentAt((t + 0.001) % 1).normalize();
 
     // 3. Aplica posição
