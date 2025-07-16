@@ -203,8 +203,8 @@ const materialShaderNuvens = new THREE.RawShaderMaterial({
 });
 
 const shaderMeshNuvens1 = new THREE.Mesh(geometriaShader, materialShaderNuvens);
-shaderMeshNuvens1.position.set(0, camera1.position.y - 4, camera1.position.z - 4);
-shaderMeshNuvens1.lookAt(0,30,30);
+shaderMeshNuvens1.position.set(camera1.position.x - 1.875, camera1.position.y - 4.5, camera1.position.z + 3);
+shaderMeshNuvens1.lookAt(25, 60, -40);
 
 const shaderMeshNuvens2 = new THREE.Mesh(geometriaShader, materialShaderNuvens);
 shaderMeshNuvens2.position.set(0, 0, camera2.position.z - 5.5);
