@@ -4,7 +4,7 @@
 Este projeto consiste na criação de um ambiente 3D interativo de uma fazenda ovelhas pulando uma cerca, utilizando a biblioteca Three.js. O objetivo principal foi aplicar conceitos de computação gráfica, como modelagem de objetos, iluminação, aplicação de texturas, manipulação de câmeras, animação e implementação de shaders personalizados. O cenário apresenta duas ovelhas que se movem por um caminho predefinido, uma cerca detalhada e um plano de chão com textura de grama, tudo sob ambiente dinâmico que simula um sonho gerado por um shader e um fundo estrelado.
 
 ## Modo de Interação
-O usuário pode interagir com o projeto. A câmera principal (camera1) permite uma visualização mais geral da cena. O botão "Mudar camera" na interface HTML permite alternar entre duas perspectivas de câmera distintas (camera1 e camera2), oferecendo diferentes visões do ambiente. A camera2 mostra uma perspectiva mais próxima da cerca que a ovelha pula.
+O usuário pode interagir com o projeto. A câmera principal (camera1) permite uma visualização mais geral da cena. O botão "Mudar câmera" na interface HTML permite alternar entre duas perspectivas de câmera distintas (camera1 e camera2), oferecendo diferentes visões do ambiente. A camera2 mostra uma perspectiva mais próxima da cerca que a ovelha pula.
 
 ## Tecnologias Utilizadas
 Os recursos utilizados foram:
