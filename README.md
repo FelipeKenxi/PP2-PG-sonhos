@@ -39,8 +39,8 @@ Para executar o projeto, siga os passos:
 
 ## Possíveis complicações
 A maior complicação que pode acontecer ao tentar rodar o código na sua máquina é a posição dos shaders em relação às câmeras, como os shaders são dois `PlaneGeometry` que foram posicionados manualmente em frente às câmeras, é possível que, dependendo da tela de resolução do seu computador, ele fique desalinhado.
-Se este for o caso é possível ajustando o valor da escala da geometria do shader, na linha 108 do arquivo [index.js](https://github.com/FelipeKenxi/PP2-PG-sonhos/blob/main/index.js).
-Os valores para algumas reoluções conhecidas:
+Se este for o caso é possível ajustar o valor da escala da geometria do shader, na linha 108 do arquivo [index.js](https://github.com/FelipeKenxi/PP2-PG-sonhos/blob/main/index.js).
+Os valores para algumas resoluções conhecidas:
 
  - 2560 x 1600 -> ( w/100, h/100);
  - 1366 x 768 -> ( w/70, h/70);
