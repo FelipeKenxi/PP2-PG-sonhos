@@ -38,7 +38,7 @@ Para executar o projeto, siga os passos:
 3) Clique com o botão direito no arquivo index.html e selecione "Open with Live Server" (ou clique no ícone "Go Live" na barra inferior). O navegador abrirá automaticamente o projeto.
 
 ## Possíveis complicações
-A maior complicação que pode acontecer ao tentar rodar o código na sua máquina é a posição dos shaders em relação às câmeras, como os shaders são dois `PlaneGeometry` que foram posicionados manualmente em frente às câmeras, é possível que, dependendo da tela de resolução do seu computador, ele fique desalinhado.
+A maior complicação que pode acontecer ao tentar rodar o código na sua máquina é a posição dos shaders em relação às câmeras, como os shaders são dois `PlaneGeometry` que foram posicionados manualmente em frente às câmeras, é possível que, dependendo da resolução de tela do seu computador, ele fique desalinhado.
 Se este for o caso é possível ajustar o valor da escala da geometria do shader, na linha 108 do arquivo [index.js](https://github.com/FelipeKenxi/PP2-PG-sonhos/blob/main/index.js).
 Os valores para algumas resoluções conhecidas:
 
@@ -50,7 +50,7 @@ Os valores para algumas resoluções conhecidas:
 | Especificação                                         | Atendida? | Observações                                                                                                                                                                                                                       |
 |-------------------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Visualização de pelo menos um objeto 3D por membro do grupo | SIM        | A ovelha (Matteo), a cerca (Matteo), o plano de chão (Gabriela) e os planos de nuvens com shader (Beatriz) são objetos 3D distintos e foram individualmente redimensionados e posicionados na cena principal.                      |
-| Utilização de um shader próprio em um dos objetos     | SIM       | Um `RawShaderMaterial` foi implementado em `index.js` para criar o efeito de nuvens no céu, com lógica de ruído e animação por tempo. (Responsável: Beatriz)                                                                      |
+| Utilização de um shader próprio em um dos objetos     | SIM       | Um `RawShaderMaterial` foi implementado em `index.js` para criar o efeito de nuvens, com lógica de ruído e animação por tempo. (Responsável: Beatriz)                                                                      |
 | Definição de pelo menos duas câmeras                  | SIM       | Duas câmeras (`camera1` e `camera2`) foram definidas em `index.js`. Há um botão na interface HTML para alternar entre elas.                                                                                                       |
 | Movimento simples de pelo menos um objeto             | SIM       | A ovelha se move continuamente ao longo de um caminho definido por uma `CatmullRomCurve3` e se orienta na direção do movimento. (Responsável: Felipe)                                                                             |
 | Aplicação de textura em pelo menos um objeto          | SIM       | A textura de grama foi aplicada ao `planoChao` e a textura de madeira à cerca (ambas em `index.js` e carregadas em `cria_cerca.js`). (Responsável: Gabriela)          
